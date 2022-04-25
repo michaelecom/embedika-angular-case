@@ -1,0 +1,156 @@
+<div [class]="['card', 'card_area']">
+  <div
+    [routerLink]="['/list']"
+    routerLinkActive="active"
+    [class]="['card-back', 'card-back_area']"
+  >
+    <img
+      id="back"
+      alt="Вернуться"
+      [class]="[
+        'card-back__icon',
+        'card-back__icon_bg',
+        'card-back__icon_area'
+      ]"
+      src="../../../assets/arrow_back.svg"
+    />
+    <label
+      for="back"
+      [class]="[
+        'card-back__label',
+        'card-back__label_area',
+        'card-back__label_text'
+      ]"
+    >
+      Вернуться
+    </label>
+  </div>
+
+  <div *ngIf="ship" [class]="['ship', 'ship_area']">
+    <div [class]="['ship-header', 'ship-header_area']">
+      <h3
+        [class]="[
+          'ship-header__title',
+          'ship-header__title_area',
+          'ship-header__title_text'
+        ]"
+      >
+        {{ ship.name }}
+      </h3>
+    </div>
+
+    <div [class]="['ship-property', 'ship-property_area']">
+      <div *ngIf="ship.type">
+        <label
+          [class]="[
+            'ship-property__label',
+            'ship-property__label_text',
+            'ship-property__label_color'
+          ]"
+        >
+          Тип
+        </label>
+        <span
+          [class]="[
+            'ship-property__span',
+            'ship-property__span_text',
+            'ship-property__span_color'
+          ]"
+        >
+          {{ ship.type }}
+        </span>
+      </div>
+
+      <div *ngIf="ship.home_port">
+        <label
+          [class]="[
+            'ship-property__label',
+            'ship-property__label_text',
+            'ship-property__label_color'
+          ]"
+        >
+          Порт
+        </label>
+        <span
+          [class]="[
+            'ship-property__span',
+            'ship-property__span_text',
+            'ship-property__span_color'
+          ]"
+        >
+          {{ ship.home_port }}
+        </span>
+      </div>
+
+      <div *ngIf="ship.weight_kg">
+        <label
+          [class]="[
+            'ship-property__label',
+            'ship-property__label_text',
+            'ship-property__label_color'
+          ]"
+        >
+          Вес
+        </label>
+        <span
+          [class]="[
+            'ship-property__span',
+            'ship-property__span_text',
+            'ship-property__span_color'
+          ]"
+        >
+          {{ ship.weight_kg }} кг
+        </span>
+      </div>
+
+      <div *ngIf="ship.year_built">
+        <label
+          [class]="[
+            'ship-property__label',
+            'ship-property__label_text',
+            'ship-property__label_color'
+          ]"
+        >
+          Год
+        </label>
+        <span
+          [class]="[
+            'ship-property__span',
+            'ship-property__span_text',
+            'ship-property__span_color'
+          ]"
+        >
+          {{ ship.year_built }}
+        </span>
+      </div>
+    </div>
+
+    <div [class]="['ship-missions', 'ship-missions_area']">
+      <label
+        *ngIf="ship.missions"
+        [class]="[
+          'ship-missions__label',
+          'ship-missions__label_area',
+          'ship-missions__label_text'
+        ]"
+      >
+        Миссии
+      </label>
+
+      <div
+        *ngIf="ship.missions"
+        [class]="[
+          'ship-missions__content',
+          'ship-missions__content_area',
+          'ship-missions__content_text'
+        ]"
+      >
+        <span *ngFor="let mission of ship.missions">{{
+          mission.name != ship.missions[ship.missions.length - 1].name
+            ? mission.name + ", "
+            : mission.name
+        }}</span>
+      </div>
+    </div>
+  </div>
+</div>

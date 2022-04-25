@@ -1,0 +1,171 @@
+.card {
+  &_area {
+    height: 100vh;
+
+    display: grid;
+    grid-template-rows: auto;
+
+    padding: 0 64px;
+
+    background-color: #fafafa;
+
+    align-content: flex-start;
+  }
+
+  &-back {
+    &_area {
+      display: grid;
+      grid-template-columns: repeat(2, auto);
+      grid-column-gap: 8px;
+
+      padding: 0;
+      margin: 48px 0 24px 0;
+
+      justify-content: start;
+
+      place-self: flex-start;
+    }
+
+    &__icon {
+      &_area {
+        width: 14px;
+        height: 14px;
+
+        cursor: pointer;
+      }
+
+      &_bg {
+        filter: invert(38%) sepia(48%) saturate(7436%) hue-rotate(219deg)
+          brightness(100%) contrast(102%);
+      }
+    }
+
+    &__label {
+      &_area {
+        cursor: pointer;
+      }
+
+      &_text {
+        color: #2962ff;
+
+        font-size: 14px;
+        line-height: 16px;
+
+        font-weight: 400;
+
+        text-decoration: none;
+      }
+    }
+  }
+
+  & .ship {
+    &_area {
+      display: grid;
+      grid-template-rows: auto;
+
+      width: 700px;
+    }
+
+    &-header {
+      &_area {
+        padding: 0;
+        margin: 0;
+
+        padding-bottom: 48px;
+      }
+
+      &__title {
+        &_area {
+          padding: 0;
+          margin: 0;
+        }
+
+        &_text {
+          color: rgba($color: #000, $alpha: 0.85);
+
+          font-size: 28px;
+          line-height: 32px;
+
+          font-weight: 500;
+        }
+      }
+    }
+
+    &-property {
+      &_area {
+        display: grid;
+        grid-template-columns: repeat(2, auto);
+      }
+
+      & > div {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+
+        padding: 0;
+        margin: 0;
+
+        padding-bottom: 24px;
+      }
+
+      &__label {
+        &_color {
+          color: rgba($color: #000, $alpha: 0.85);
+        }
+      }
+
+      &__span {
+        &_color {
+          color: #2962ff;
+        }
+      }
+
+      &__label,
+      &__span {
+        &_text {
+          font-size: 16px;
+          line-height: 24px;
+
+          font-weight: 400;
+        }
+      }
+    }
+
+    &-missions {
+      &_area {
+        display: grid;
+      }
+
+      &__label {
+        &_area {
+          padding: 0;
+          margin: 24px 0;
+        }
+
+        &_text {
+          color: rgba($color: #000, $alpha: 0.85);
+
+          font-size: 16px;
+          line-height: 24px;
+
+          font-weight: 400;
+        }
+      }
+
+      &__content {
+        &_area {
+          padding: 0;
+          margin: 0;
+        }
+
+        &_text {
+          color: #2962ff;
+
+          font-size: 16px;
+          line-height: 32px;
+
+          font-weight: 400;
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,238 @@
+<div [class]="['list', 'list_area']">
+  <div [class]="['content', 'content_area']">
+    <h1
+      [class]="['content__title', 'content__title_area', 'content__title_text']"
+    >
+      {{ title_content }}
+    </h1>
+
+    <div *ngIf="ships" [class]="['ships', 'ships_area']">
+      <div
+        *ngFor="
+          let ship of ships
+            | sidebarFilter: nameFilterValue:portFilterValue:typeFilterValue
+            | slice: slice_begin:slice_end
+        "
+        [class]="['ships-item', 'ships-item_area']"
+      >
+        <div [class]="['ships-item-header', 'ships-item-header_area']">
+          <h3
+            [class]="[
+              'ships-item-header__title',
+              'ships-item-header__title_area',
+              'ships-item-header__title_text'
+            ]"
+          >
+            {{ ship.name }}
+          </h3>
+          <a
+            [routerLink]="['/card']"
+            routerLinkActive="active"
+            [routerLinkActiveOptions]="{ exact: true }"
+            [queryParams]="{ name: ship.name.replaceAll(' ', '_') }"
+            [class]="[
+              'ships-item-header__btn',
+              'ships-item-header__btn_bg',
+              'ships-item-header__btn_area'
+            ]"
+          >
+          </a>
+        </div>
+
+        <div [class]="['ships-item-content', 'ships-item-content_area']">
+          <div>
+            <label
+              [class]="[
+                'ships-item-content__label',
+                'ships-item-content__label_area',
+                'ships-item-content__label_text',
+                'ships-item-content__label_color'
+              ]"
+            >
+              Тип
+            </label>
+            <span
+              [class]="[
+                'ships-item-content__span',
+                'ships-item-content__span_text',
+                'ships-item-content__span_color'
+              ]"
+            >
+              {{ ship.type }}
+            </span>
+          </div>
+          <div>
+            <label
+              [class]="[
+                'ships-item-content__label',
+                'ships-item-content__label_area',
+                'ships-item-content__label_text',
+                'ships-item-content__label_color'
+              ]"
+            >
+              Порт
+            </label>
+            <span
+              [class]="[
+                'ships-item-content__span',
+                'ships-item-content__span_text',
+                'ships-item-content__span_color'
+              ]"
+            >
+              {{ ship.home_port }}
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div [class]="['navigate', 'navigate_area']">
+      <span
+        [class]="[
+          'navigate__prev',
+          'navigate__prev_bg',
+          'navigate__prev_area',
+          'navigate__prev_color'
+        ]"
+        (click)="slicePrev()"
+      ></span>
+      <span [class]="['navigate__page', 'navigate__page_text']">
+        {{ page }}
+      </span>
+      <span
+        [class]="[
+          'navigate__next',
+          'navigate__next_bg',
+          'navigate__next_area',
+          'navigate__next_color'
+        ]"
+        (click)="sliceNext()"
+      ></span>
+    </div>
+  </div>
+
+  <div [class]="['sidebar', 'sidebar_area']">
+    <h1
+      [class]="['sidebar__title', 'sidebar__title_area', 'sidebar__title_text']"
+    >
+      {{ title_sidebar }}
+    </h1>
+
+    <div [class]="['filter-name', 'filter-name_area']">
+      <label
+        for="nameFilter"
+        *ngIf="nameFilterValue != ''"
+        [class]="['filter-name__label', 'filter-name__label_text']"
+      >
+        Название
+      </label>
+      <input
+        id="nameFilter"
+        type="text"
+        placeholder="Название"
+        [value]="nameFilterValue"
+        (input)="setNameFilter($event)"
+        [class]="[
+          'filter-name__input',
+          'filter-name__input_area',
+          'filter-name__input_text',
+          'filter-name__input_placeholder'
+        ]"
+      />
+    </div>
+
+    <div [class]="['filter-port', 'filter-port_area']">
+      <label
+        for="portFilter"
+        *ngIf="ports_label != ''"
+        [class]="['filter-port__label', 'filter-port__label_text']"
+      >
+        Порт
+      </label>
+      <input
+        id="portFilter"
+        type="text"
+        placeholder="Порт"
+        [value]="ports_label"
+        [class]="[
+          'filter-port__input',
+          'filter-port__input_area',
+          'filter-port__input_text',
+          'filter-port__input_placeholder'
+        ]"
+        (click)="ports_box = !ports_box"
+        readonly
+      />
+      <div
+        *ngIf="ports_box"
+        [class]="['filter-port-box', 'filter-port-box_area']"
+      >
+        <div
+          *ngFor="let port of ports"
+          [class]="['filter-port-item', 'filter-port-item_area']"
+        >
+          <input
+            [id]="port"
+            type="checkbox"
+            [class]="[
+              'filter-port-item__input',
+              'filter-port-item__input_area',
+              'filter-port-item__input_color'
+            ]"
+            [checked]="portFilterValue.includes(port)"
+            (change)="setPortFilter($event)"
+          />
+          <label
+            [for]="port"
+            [class]="[
+              'filter-port-item__label',
+              'filter-port-item__label_area',
+              'filter-port-item__label_text'
+            ]"
+            >{{ port }}</label
+          >
+        </div>
+      </div>
+    </div>
+
+    <div [class]="['filter-type', 'filter-type_area']">
+      <label
+        for="typeFilter"
+        [class]="['filter-type__label', 'filter-type__label_text']"
+      >
+        Тип
+      </label>
+      <div
+        id="typeFilter"
+        [class]="['filter-type-box', 'filter-type-box_area']"
+      >
+        <div
+          *ngFor="let type of types"
+          [class]="['filter-type-item', 'filter-type-item_area']"
+        >
+          <input
+            [id]="type"
+            type="radio"
+            name="types"
+            [class]="[
+              'filter-type-item__input',
+              'filter-type-item__input_area',
+              'filter-type-item__input_color'
+            ]"
+            [checked]="type == typeFilterValue"
+            (change)="setTypeFilter($event)"
+          />
+          <label
+            [for]="type"
+            [class]="[
+              'filter-type-item__label',
+              'filter-type-item__label_area',
+              'filter-type-item__label_text'
+            ]"
+            >{{ type }}</label
+          >
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
